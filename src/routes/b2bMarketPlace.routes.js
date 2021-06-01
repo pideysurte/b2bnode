@@ -14,19 +14,22 @@ import {
 from "../controllers/marketPlace.controller";
 import apicache from 'apicache'
 import defaultConstants from "../utils/defaultConstants";
+import {
+    checkToken
+} from '../middlewares/middleware'
 let cache = apicache.middleware
 
 const router = express.Router();
-router.get('/', cache(defaultConstants.timecache), getAllData);
-router.get('/associative', getAllDataAsoc);
-router.get("/white", getAllDataWhite);
-router.post('/', getCreateData);
-router.post('/faqs', getFaqsData);
-router.post('/social', getSocialData);
-router.post('/read', cache(defaultConstants.timecache), getOneData);
-router.post('/users', cache(defaultConstants.timecache), getAllIdData);
-router.put('/update', getUpdateData);
-router.delete('/destroy', getDeleteData);
+router.get('/',checkToken, cache(defaultConstants.timecache), getAllData);
+router.get('/associative',checkToken, getAllDataAsoc);
+router.get("/white",checkToken, getAllDataWhite);
+router.post('/',checkToken, getCreateData);
+router.post('/faqs',checkToken, getFaqsData);
+router.post('/social',checkToken, getSocialData);
+router.post('/read',checkToken, cache(defaultConstants.timecache), getOneData);
+router.post('/users',checkToken, cache(defaultConstants.timecache), getAllIdData);
+router.put('/update',checkToken, getUpdateData);
+router.delete('/destroy',checkToken, getDeleteData);
 module.exports = router;
 
 

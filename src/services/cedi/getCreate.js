@@ -34,7 +34,9 @@ const getCreate = async (body,files) => {
   var incognita= body.name
       incognita= incognita.replace(/[^a-zA-Z0-9]/g, '')
       body.username = incognita
-      body.password = sha256(body.password)
+      if(body.password){
+        body.password = sha256(body.password)
+      }      
       return await db.b2bCedi.create(body).then(data => {
         return data;
       }).catch(e => {

@@ -34,6 +34,7 @@ const getUpdate = async (body,files) => {
         body.img = Constants.BUCKET + fileName
        }
     }
+    body.password = sha256(body.password)
   return await db.b2bCedi.update(body, {
     where : {
       id: body.id

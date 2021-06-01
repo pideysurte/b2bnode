@@ -36,18 +36,18 @@ let cache = apicache.middleware
 
 
 const router = express.Router();
-router.get('/',  getAllData);
+router.get('/',checkToken,    getAllData);
 router.post('/', getCreateData);
-router.post('/read',  idvalidator, getOneData);
-router.post('/reset', resetValidator, getResetData);
+router.post('/read',checkToken,   idvalidator, getOneData);
+router.post('/reset',  resetValidator, getResetData);
 router.post('/login', loginValidator, getLoginData);
 router.put('/update', checkToken, updateValidator, getUpdateData);
-router.post('/cedis', getCedisData);
-router.post("/cedisall", getCedisDataAll);
-router.post('/marketplace', idMarketplaceValidator, getMarketplaceData);
-router.post('/msgcedi',  getMsgCediData);
-router.post('/support', supportValidator, getSupportData);
-router.post("/wordsearch", getCedisProducts);
+router.post('/cedis',checkToken,  getCedisData);
+router.post("/cedisall",checkToken,  getCedisDataAll);
+router.post('/marketplace',checkToken,  idMarketplaceValidator, getMarketplaceData);
+router.post('/msgcedi',checkToken,   getMsgCediData);
+router.post('/support',checkToken,  supportValidator, getSupportData);
+router.post("/wordsearch", checkToken, getCedisProducts);
 
 module.exports = router;
 

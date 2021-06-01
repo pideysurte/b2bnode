@@ -1,10 +1,10 @@
 import db from '../../database/models/index';
 
-const getOne = async (id) => {
+const getOneName = async (name) => {
   return await db.b2bCedi.findOne({
     raw: true,
     where: {
-      id : id
+        username : name
     }
   }).then(data => {
      if (data.socialRef){
@@ -18,5 +18,7 @@ const getOne = async (id) => {
 }
 
 module.exports = {
-  getOne
+  getOneName
 }
+
+

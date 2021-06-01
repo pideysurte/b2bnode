@@ -2,6 +2,7 @@
 import db from '../../database/models/index';;
 
 const getUpdate = async (body) => {
+  console.log(body)
   return await db.b2bFabDist.update(body, {
     where : {
       id: body.id

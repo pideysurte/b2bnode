@@ -37,8 +37,6 @@ const getLogin = async (idMarketplace, email, password) => {
                 secret,
                 { expiresIn: '24h' }
               );
-            //data.b2bMarketPlace.versMarketplace
-            console.log(data)
               return {
                 success: true,
                 message: 'Authentication successful!',

@@ -10,7 +10,8 @@ const s3 = new AWS.S3({
 });
 
 const getUpdate = async (body, files) => {
-
+      console.log(body)
+      console.log(files)
       if (files) {
         if (files.length >= 1) {
             let fileName = Date.now() + files[0].originalname;

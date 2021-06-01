@@ -12,18 +12,21 @@ import {
 from "../controllers/establecimientosClientCedi.controller";
 import apicache from 'apicache'
 import defaultConstants from "../utils/defaultConstants";
+import {
+    checkToken
+} from '../middlewares/middleware'
 let cache = apicache.middleware
 
 const router = express.Router();
-router.get('/', cache(defaultConstants.timecache), getAllData);
-router.post('/', getCreateData);
-router.post('/usercedi', getAllUserCediData);
-router.post('/read', cache(defaultConstants.timecache), getOneData);
-router.put('/update', getUpdateData);
-router.delete('/destroy', getDeleteData);
+router.get('/',checkToken, cache(defaultConstants.timecache), getAllData);
+router.post('/',checkToken, getCreateData);
+router.post('/usercedi',checkToken, getAllUserCediData);
+router.post('/read',checkToken, cache(defaultConstants.timecache), getOneData);
+router.put('/update',checkToken, getUpdateData);
+router.delete('/destroy',checkToken, getDeleteData);
 
-router.put('/block', getUpdateBlockData);
-router.delete('/block', getDeleteBlockData);
+router.put('/block',checkToken, getUpdateBlockData);
+router.delete('/block',checkToken, getDeleteBlockData);
 
 module.exports = router;
 

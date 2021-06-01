@@ -4,10 +4,12 @@ import {
     getUpdateData
 }
 from "../controllers/cart.controller";
-
+import {
+    checkToken
+} from '../middlewares/middleware'
 const router = express.Router();
-router.get('/', getAllData);
-router.put('/update', getUpdateData);
+router.get('/',checkToken, getAllData);
+router.put('/update',checkToken, getUpdateData);
 module.exports = router;
 
 

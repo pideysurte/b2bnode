@@ -2,6 +2,9 @@ import {
     getOne
 } from '../services/cedi/getOne';
 import {
+    getOneName
+} from '../services/cedi/getOneName';
+import {
     getAll
 } from '../services/cedi/getAll';
 import {
@@ -47,6 +50,7 @@ export async function getAllData(req, res, next) {
 export async function getCreateData(req, res, next) {
     try {
        
+        console.log(req)
         getCreate(req.body, req.files)
             .then(data => {
                 res.status(200).json({
@@ -85,10 +89,27 @@ export function getOneData(req, res, next) {
         });
     }
 }
-
-export async function getUpdateData(req, res, next) {
+export function getOneNameData(req, res, next) {
     try {
-       
+        const {
+            name
+        } = req.body;
+        getOneName(name).then(data => {
+            res.status(200).json({
+                message: 'One row',
+                data: data
+            });
+        });
+    } catch (e) {
+        res.status(500).json({
+            message: 'Something goes wrong',
+            data: {},
+            error: true
+        });
+    }
+}
+export async function getUpdateData(req, res, next) {
+    try {      
 
         await getUpdate(req.body, req.files)
             .then(data => {

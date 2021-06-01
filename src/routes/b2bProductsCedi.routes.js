@@ -11,19 +11,23 @@ import {
 from "../controllers/productsCedi.controller";
 import apicache from 'apicache'
 import defaultConstants from "../utils/defaultConstants";
+import {
+    checkToken
+} from '../middlewares/middleware'
 let cache = apicache.middleware
 import multer from 'multer';
 const multerupload = multer({
     dest: '../uploads/'
 })
+
 const router = express.Router();
-router.get('/', cache(defaultConstants.timecache), getAllData);
-router.post('/',multerupload.any(), getCreateData);
-router.post('/read', cache(defaultConstants.timecache), getOneData);
-router.post('/readcat', cache(defaultConstants.timecache), getAllDataCat);
-router.post('/readfeatured', cache(defaultConstants.timecache), getAllDataDest);
-router.put('/update',multerupload.any(), getUpdateData);
-router.delete('/destroy', getDeleteData);
+router.get('/',checkToken, cache(defaultConstants.timecache), getAllData);
+router.post('/',checkToken,multerupload.any(), getCreateData);
+router.post('/read',checkToken, cache(defaultConstants.timecache), getOneData);
+router.post('/readcat',checkToken, cache(defaultConstants.timecache), getAllDataCat);
+router.post('/readfeatured',checkToken, cache(defaultConstants.timecache), getAllDataDest);
+router.put('/update',checkToken,multerupload.any(), getUpdateData);
+router.delete('/destroy',checkToken, getDeleteData);
 module.exports = router;
 
 

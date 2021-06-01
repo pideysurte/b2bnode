@@ -4,7 +4,6 @@ import {
 } from 'js-sha256';
 
 const getCreate = async (body) => {
-  body.password = sha256(body.password)
   return await db.b2bUserAdmin.create(body).then(data => {
     return data;
   }).catch(e => {

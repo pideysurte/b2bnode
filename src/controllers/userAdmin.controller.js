@@ -52,7 +52,7 @@ logger.level = DefaultConstants.logerlevel;
 export async function getAllData(req, res, next) {
     try {
         logger.info("[getAllData] INIT");
-        let params = await getAll();
+        let params = await getAll(req);
         ResponseUtil.success(res, params);
     } catch (error) {
         logger.info("[getAllData]  ERROR", error);
@@ -90,7 +90,7 @@ export async function getCreateData(req, res, next) {
         } = req.body;
         
         unique(email, idMarketplace).then(data => {
-            console.log(data)
+  
             if (!data) {
                     try {
                         logger.info("[getCreateData] INIT");

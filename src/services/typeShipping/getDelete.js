@@ -1,15 +1,30 @@
 import db from '../../database/models/index';;
 
 const getDelete = async (body) => {
-    return await db.b2bTypeShipping.destroy({
+    let del = 0
+    let Establecimientos = await db.b2bEstablecimientosClientCedi.findOne({
+        raw:true,
         where: {
-            id: body.id
+            typeShipping : body.id
         }
-    }).then(data => {
-        return data;
-    }).catch(e => {
-        console.log(e);
-    });
+      }).then(data => {
+            return data
+         }).catch(e => {
+            console.log(e);
+         });
+
+    if(!Establecimientos){
+        await db.b2bTypeShipping.destroy({
+            where: {
+                id: body.id
+            }
+        }).then(data => {
+            return data;
+        }).catch(e => {
+            console.log(e);
+        });
+    }
+    return del
 }
 
 module.exports = {

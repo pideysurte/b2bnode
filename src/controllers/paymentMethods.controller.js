@@ -71,7 +71,9 @@ export async function getDeleteData(req, res, next) {
     try {
         logger.info("[getDeleteData] INIT");
         let params = await getDelete(req.body);
+        console.log(params)
         ResponseUtil.success(res, params);
+        
     } catch (error) {
         logger.info("[getDeleteData]  ERROR", error);
         ResponseUtil.badRequest(res, errors.DATA_NOT_FOUND, error.message);

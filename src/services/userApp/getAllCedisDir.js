@@ -3,6 +3,7 @@ const getAllCedisDir = async (body) => {
      function getDistanciaMetros(lat1,lon1,lat2,lon2)
       {
         var rad = function(x) {return x*Math.PI/180;}
+        var R = 6378.137; 
         var dLat = rad( lat2 - lat1 );
         var dLong = rad( lon2 - lon1 );
         var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(rad(lat1)) * 
@@ -28,7 +29,7 @@ const getAllCedisDir = async (body) => {
    let cedis = await db.b2bCedi.findAll({
         raw:true,
         where: query,
-        attributes: ['id', 'name', 'idMarketplace', 'img', 'socialRef', 'address', 'emailServiceClient','coordinates']
+        attributes: ['id', 'name', 'idMarketplace', 'img', 'socialRef', 'address', 'emailServiceClient','coordinates','slogan','description','textTyc','textPd']
     }).then(data => {
          data.forEach(element => element.socialRef = JSON.parse(element.socialRef));
         return data;
@@ -45,6 +46,7 @@ const getAllCedisDir = async (body) => {
         let lon2 = body.lng
         let dis = getDistanciaMetros(lat1,lon1,lat2,lon2)
             dis = parseInt(dis)
+            console.log(dis)
             if(dis <= coo.radio ){
               datos.push(element)
             }

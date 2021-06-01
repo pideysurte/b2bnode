@@ -22,7 +22,7 @@ const getAllCedis = async (body) => {
                 status: 1 ,
                 actCedi: 1              
             },
-            attributes: ['id', 'name', 'idMarketplace', 'img', 'socialRef', 'address']
+            attributes: ['id', 'name', 'idMarketplace', 'img', 'socialRef', 'address','slogan','description','textTyc','textPd']
         }).then(data => {
              data.forEach(element => element.socialRef = JSON.parse(element.socialRef));
              cedis.push({
@@ -47,7 +47,7 @@ const getAllCedis = async (body) => {
                  status:1,
                  actCedi: 1 
              },
-             attributes: ['id', 'name', 'idMarketplace', 'img', 'socialRef', 'address']
+             attributes: ['id', 'name', 'idMarketplace', 'img', 'socialRef', 'address','slogan','description','textTyc','textPd']
          }).then(data => {
              data.forEach(element => element.socialRef = JSON.parse(element.socialRef));
              cedis.push({
